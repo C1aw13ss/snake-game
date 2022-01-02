@@ -1,6 +1,9 @@
 # import the pygame module, so you can use it
 import pygame
 
+from src.constants import BLACK, YELLOW
+
+current_position = [0, 0]
 
 # define a main function
 def main():
@@ -16,8 +19,22 @@ def main():
 
     # main loop
     while running:
+        screen.fill(BLACK)
+        pygame.draw.circle(screen, YELLOW, current_position, 10)
+        pygame.display.update()
+
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+                current_position[0] -= 1
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                current_position[0] += 1
+
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
+                current_position[1] -= 1
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
+                current_position[1] += 1
+
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
